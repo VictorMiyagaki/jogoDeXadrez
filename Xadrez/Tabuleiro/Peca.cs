@@ -45,6 +45,7 @@
 
         public bool movimentoPossivel(Posicao pos)
         {
+            tab.validarPosicao(pos);
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
     }

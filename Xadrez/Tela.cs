@@ -14,7 +14,7 @@ namespace Xadrez
             imprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.turno);
-            if(!partida.terminada)
+            if (!partida.terminada)
             {
                 Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
                 if (partida.xeque)
@@ -26,9 +26,9 @@ namespace Xadrez
             {
                 Console.WriteLine("XEQUEMATE!");
                 Console.WriteLine("Vencedor: " + partida.jogadorAtual);
-            }            
+            }
         }
-       public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
+        public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("Peças capturadas:");
             Console.Write("Brancas: ");
@@ -93,10 +93,21 @@ namespace Xadrez
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
-            string s = Console.ReadLine();
-            char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
-            return new PosicaoXadrez(coluna, linha);
+            try
+            {
+                string s = Console.ReadLine();
+                if (s == "")
+                {
+                    throw new TabuleiroException("Você não digitou nada!");
+                }
+                char coluna = s[0];
+                int linha = int.Parse(s[1] + "");
+                return new PosicaoXadrez(coluna, linha);
+            }
+            catch (System.FormatException)
+            {
+                throw new TabuleiroException("Você digitou o texto incorretamente!"); 
+            }
         }
 
         public static void imprimirPeca(Peca peca)
